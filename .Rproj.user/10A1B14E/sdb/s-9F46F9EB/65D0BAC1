@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(tidyverse)\nbg1 <- read_csv(\"C:/Users/Matthew Buras/Desktop/board-game-data.zip\")\ndim(bg1)\nnames(bg1)\nstr(bg1)\nrange(bg1$rank)\n?t.test\nvar1 <- sd(bg1$geek_rating)^2\nvar2 <- sd(bg1$avg_rating)^2\nvar.test(bg1$geek_rating, bg1$avg_rating, ratio = 1, alternative = \"two.sided\")\n\nt.test(bg1$geek_rating, bg1$avg_rating, alternative = \"two.sided\", \n        paired = TRUE, mu = 0, var.equal = FALSE)\n\nbg2 <- bg1 %>% mutate(diff1 = avg_rating - geek_rating)\ndim(bg2)\nnames(bg2)\nbg2 %>% select(geek_rating, avg_rating, diff1)\n\nis.data.frame(bg2)\n\nbg2 %>% ggplot(aes(x = geek_rating)) + geom_histogram()\nbg2 %>% ggplot(aes(x = avg_rating)) + geom_histogram()\nbg2 %>% ggplot(aes(x = diff1)) + geom_histogram()\nbg2 %>% ggplot(aes(x = log(diff1)))+ geom_histogram()\n\nbg2 %>% ggplot(aes(x = geek_rating, y = max(rank) - rank)) + geom_point()\nbg2 %>% ggplot(aes(x = avg_rating, y = max(rank) - rank)) + geom_point() + geom_smooth(se = FALSE)\n\nbg2 %>% ggplot(aes(x = geek_rating, y = avg_time)) + geom_point()\nbg2 %>% ggplot(aes(x = geek_rating, y = avg_time)) + geom_point() + scale_y_log10()\n\nfit1 <- lm(geek_rating ~ avg_time, data = bg2)\nsummary(fit1)\n\n#Q: is average time in seconds or minutes? makes more sense in seconds, almost.\nbg2 %>% filter(0 < avg_time & avg_time < 2500) %>% summary(avg_time)\nbg2 %>% filter(0 < avg_time & avg_time < 2500) %>% ggplot(aes(x = avg_rating, y = avg_time)) + geom_point()\nfit2 <- lm(avg_rating ~ avg_time, data = bg2)\nsummary(fit2)\n",
+    "created" : 1499922180325.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2796276981",
+    "id" : "65D0BAC1",
+    "lastKnownWriteTime" : 1499925050,
+    "last_content_update" : 1499925050319,
+    "path" : "~/BGGeek/bggDataCleaning.R",
+    "project_path" : "bggDataCleaning.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
